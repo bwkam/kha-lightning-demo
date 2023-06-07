@@ -1,0 +1,810 @@
+pool link_pool
+  depth = 1
+
+rule cc
+  deps = gcc
+  depfile = $out.d
+  command = gcc -O2 -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/Linux/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/POSIX/Sources -I../wayland -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics4/OpenGL/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics5/G5onG4/Sources -I../Sources/include -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/lib -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/include -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11 -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/libs/nekoapi -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/include -DHXCPP_API_LEVEL=400 -DHXCPP_GC_GENERATIONAL -DKORE_G1 -DKORE_G2 -DKORE_G3 -DKORE_A1 -DKORE_A2 -DKORE_LZ4X -DKORE_OPENGL -DKINC_EGL -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=600 -DKORE_G4 -DKORE_G5 -DKORE_G5ONG4 -DKORE_MULTITHREADED_AUDIO -DHX_LINUX -DSTATIC_LINK -DPCRE2_STATIC -DPCRE2_CODE_UNIT_WIDTH=8 -DHXCPP_VISIT_ALLOCS -DKHA -DKORE -DROTATE90 -DHAVE_CONFIG_H -DSUPPORT_UTF -DSUPPORT_UCP -DNDEBUG -MD -MF $out.d -c $in -o $out
+
+rule cxx
+  deps = gcc
+  depfile = $out.d
+  command = g++ -O2 -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/Linux/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/POSIX/Sources -I../wayland -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics4/OpenGL/Sources -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics5/G5onG4/Sources -I../Sources/include -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/lib -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/include -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11 -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/libs/nekoapi -I../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/include -DHXCPP_API_LEVEL=400 -DHXCPP_GC_GENERATIONAL -DKORE_G1 -DKORE_G2 -DKORE_G3 -DKORE_A1 -DKORE_A2 -DKORE_LZ4X -DKORE_OPENGL -DKINC_EGL -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=600 -DKORE_G4 -DKORE_G5 -DKORE_G5ONG4 -DKORE_MULTITHREADED_AUDIO -DHX_LINUX -DSTATIC_LINK -DPCRE2_STATIC -DPCRE2_CODE_UNIT_WIDTH=8 -DHXCPP_VISIT_ALLOCS -DKHA -DKORE -DROTATE90 -DHAVE_CONFIG_H -DSUPPORT_UTF -DSUPPORT_UCP -DNDEBUG -MD -MF $out.d -c $in -o $out
+
+rule link
+  pool = link_pool
+  command = g++ -o $out -O2 $in -static-libgcc -static-libstdc++ -pthread -lasound -ldl -ludev -lGL -lEGL
+
+build compute.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics4/OpenGL/Sources/kinc/backend/compute.c
+
+build openglunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics4/OpenGL/Sources/kinc/backend/graphics4/openglunit.c
+
+build g5ong4unit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/Graphics5/G5onG4/Sources/kinc/backend/graphics5/g5ong4unit.c
+
+build linuxunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/Linux/Sources/kinc/backend/linuxunit.c
+
+build posixunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Backends/System/POSIX/Sources/kinc/backend/posixunit.c
+
+build rootunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/rootunit.c
+
+build rootunit_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/rootunit.cpp
+
+build a1unit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/audio1/a1unit.c
+
+build audio.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/audio2/audio.c
+
+build graphics.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/graphics1/graphics.c
+
+build graphics_kore.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/graphics2/graphics_kore.cpp
+
+build graphics_soft.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/graphics2/graphics_soft.c
+
+build g4unit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/graphics4/g4unit.c
+
+build g5unit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/graphics5/g5unit.c
+
+build inputunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/input/inputunit.c
+
+build iounit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/io/iounit.c
+
+build stb_vorbis.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/libs/stb_vorbis.c
+
+build mathunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/math/mathunit.c
+
+build networkunit.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Kinc/Sources/kinc/network/networkunit.c
+
+build waylandunit.o: cc ../wayland/wayland-generated/waylandunit.c
+
+build camera.o: cxx ../Sources/src/Camera.cpp
+
+build date.o: cxx ../Sources/src/Date.cpp
+
+build lambda.o: cxx ../Sources/src/Lambda.cpp
+
+build main.o: cxx ../Sources/src/Main.cpp
+
+build matrixutils.o: cxx ../Sources/src/MatrixUtils.cpp
+
+build reflect.o: cxx ../Sources/src/Reflect.cpp
+
+build scene.o: cxx ../Sources/src/Scene.cpp
+
+build std.o: cxx ../Sources/src/Std.cpp
+
+build stringtools.o: cxx ../Sources/src/StringTools.cpp
+
+build sys.o: cxx ../Sources/src/Sys.cpp
+
+build type.o: cxx ../Sources/src/Type.cpp
+
+build __boot__.o: cxx ../Sources/src/__boot__.cpp
+
+build __files__.o: cxx ../Sources/src/__files__.cpp
+
+build __lib__.o: cxx ../Sources/src/__lib__.cpp
+
+build __resources__.o: cxx ../Sources/src/__resources__.cpp
+
+build int64map.o: cxx ../Sources/src/cpp/Int64Map.cpp
+
+build gc.o: cxx ../Sources/src/cpp/vm/Gc.cpp
+
+build entrypoint.o: cxx ../Sources/src/haxe/EntryPoint.cpp
+
+build exception.o: cxx ../Sources/src/haxe/Exception.cpp
+
+build imap.o: cxx ../Sources/src/haxe/IMap.cpp
+
+build log.o: cxx ../Sources/src/haxe/Log.cpp
+
+build mainevent.o: cxx ../Sources/src/haxe/MainEvent.cpp
+
+build mainloop.o: cxx ../Sources/src/haxe/MainLoop.cpp
+
+build nativestacktrace.o: cxx ../Sources/src/haxe/NativeStackTrace.cpp
+
+build timer.o: cxx ../Sources/src/haxe/Timer.cpp
+
+build unserializer.o: cxx ../Sources/src/haxe/Unserializer.cpp
+
+build valueexception.o: cxx ../Sources/src/haxe/ValueException.cpp
+
+build defaultresolver.o: cxx ../Sources/src/haxe/_Unserializer/DefaultResolver.cpp
+
+build intmap.o: cxx ../Sources/src/haxe/ds/IntMap.cpp
+
+build list.o: cxx ../Sources/src/haxe/ds/List.cpp
+
+build objectmap.o: cxx ../Sources/src/haxe/ds/ObjectMap.cpp
+
+build stringmap.o: cxx ../Sources/src/haxe/ds/StringMap.cpp
+
+build listnode.o: cxx ../Sources/src/haxe/ds/_List/ListNode.cpp
+
+build notimplementedexception.o: cxx ../Sources/src/haxe/exceptions/NotImplementedException.cpp
+
+build posexception.o: cxx ../Sources/src/haxe/exceptions/PosException.cpp
+
+build bytes.o: cxx ../Sources/src/haxe/io/Bytes.cpp
+
+build bytesbuffer.o: cxx ../Sources/src/haxe/io/BytesBuffer.cpp
+
+build bytesinput.o: cxx ../Sources/src/haxe/io/BytesInput.cpp
+
+build bytesoutput.o: cxx ../Sources/src/haxe/io/BytesOutput.cpp
+
+build encoding.o: cxx ../Sources/src/haxe/io/Encoding.cpp
+
+build eof.o: cxx ../Sources/src/haxe/io/Eof.cpp
+
+build error.o: cxx ../Sources/src/haxe/io/Error.cpp
+
+build fphelper.o: cxx ../Sources/src/haxe/io/FPHelper.cpp
+
+build input.o: cxx ../Sources/src/haxe/io/Input.cpp
+
+build output.o: cxx ../Sources/src/haxe/io/Output.cpp
+
+build path.o: cxx ../Sources/src/haxe/io/Path.cpp
+
+build arrayiterator.o: cxx ../Sources/src/haxe/iterators/ArrayIterator.cpp
+
+build alignedquad.o: cxx ../Sources/src/kha/AlignedQuad.cpp
+
+build assets.o: cxx ../Sources/src/kha/Assets.cpp
+
+build blobcallback.o: cxx ../Sources/src/kha/BlobCallback.cpp
+
+build canvas.o: cxx ../Sources/src/kha/Canvas.cpp
+
+build display.o: cxx ../Sources/src/kha/Display.cpp
+
+build displaymode.o: cxx ../Sources/src/kha/DisplayMode.cpp
+
+build frametask.o: cxx ../Sources/src/kha/FrameTask.cpp
+
+build framebuffer.o: cxx ../Sources/src/kha/Framebuffer.cpp
+
+build framebufferoptions.o: cxx ../Sources/src/kha/FramebufferOptions.cpp
+
+build image.o: cxx ../Sources/src/kha/Image.cpp
+
+build imagecallback.o: cxx ../Sources/src/kha/ImageCallback.cpp
+
+build kravur.o: cxx ../Sources/src/kha/Kravur.cpp
+
+build kravurimage.o: cxx ../Sources/src/kha/KravurImage.cpp
+
+build loaderimpl.o: cxx ../Sources/src/kha/LoaderImpl.cpp
+
+build resource.o: cxx ../Sources/src/kha/Resource.cpp
+
+build scheduler.o: cxx ../Sources/src/kha/Scheduler.cpp
+
+build shaders.o: cxx ../Sources/src/kha/Shaders.cpp
+
+build sound.o: cxx ../Sources/src/kha/Sound.cpp
+
+build soundcallback.o: cxx ../Sources/src/kha/SoundCallback.cpp
+
+build system.o: cxx ../Sources/src/kha/System.cpp
+
+build systemimpl.o: cxx ../Sources/src/kha/SystemImpl.cpp
+
+build systemoptions.o: cxx ../Sources/src/kha/SystemOptions.cpp
+
+build timetask.o: cxx ../Sources/src/kha/TimeTask.cpp
+
+build video.o: cxx ../Sources/src/kha/Video.cpp
+
+build window.o: cxx ../Sources/src/kha/Window.cpp
+
+build windowoptions.o: cxx ../Sources/src/kha/WindowOptions.cpp
+
+build worker.o: cxx ../Sources/src/kha/Worker.cpp
+
+build bloblist.o: cxx ../Sources/src/kha/_Assets/BlobList.cpp
+
+build fontlist.o: cxx ../Sources/src/kha/_Assets/FontList.cpp
+
+build imagelist.o: cxx ../Sources/src/kha/_Assets/ImageList.cpp
+
+build soundlist.o: cxx ../Sources/src/kha/_Assets/SoundList.cpp
+
+build videolist.o: cxx ../Sources/src/kha/_Assets/VideoList.cpp
+
+build color_impl_.o: cxx ../Sources/src/kha/_Color/Color_Impl_.cpp
+
+build windowfeatures_impl_.o: cxx ../Sources/src/kha/_WindowOptions/WindowFeatures_Impl_.cpp
+
+build message.o: cxx ../Sources/src/kha/_Worker/Message.cpp
+
+build bytearrayprivate.o: cxx ../Sources/src/kha/arrays/ByteArrayPrivate.cpp
+
+build bytearray_impl_.o: cxx ../Sources/src/kha/arrays/_ByteArray/ByteArray_Impl_.cpp
+
+build float32array_impl_.o: cxx ../Sources/src/kha/arrays/_Float32Array/Float32Array_Impl_.cpp
+
+build int16array_impl_.o: cxx ../Sources/src/kha/arrays/_Int16Array/Int16Array_Impl_.cpp
+
+build int32array_impl_.o: cxx ../Sources/src/kha/arrays/_Int32Array/Int32Array_Impl_.cpp
+
+build uint32array_impl_.o: cxx ../Sources/src/kha/arrays/_Uint32Array/Uint32Array_Impl_.cpp
+
+build audiochannel.o: cxx ../Sources/src/kha/audio1/AudioChannel.cpp
+
+build audio_.o: cxx ../Sources/src/kha/audio2/Audio.cpp
+
+build audio1.o: cxx ../Sources/src/kha/audio2/Audio1.cpp
+
+build audiochannel_.o: cxx ../Sources/src/kha/audio2/AudioChannel.cpp
+
+build buffer.o: cxx ../Sources/src/kha/audio2/Buffer.cpp
+
+build resamplingaudiochannel.o: cxx ../Sources/src/kha/audio2/ResamplingAudioChannel.cpp
+
+build streamchannel.o: cxx ../Sources/src/kha/audio2/StreamChannel.cpp
+
+build crc32.o: cxx ../Sources/src/kha/audio2/ogg/tools/Crc32.cpp
+
+build mathtools.o: cxx ../Sources/src/kha/audio2/ogg/tools/MathTools.cpp
+
+build mdct.o: cxx ../Sources/src/kha/audio2/ogg/tools/Mdct.cpp
+
+build reader.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/Reader.cpp
+
+build vorbisdecodestate.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/VorbisDecodeState.cpp
+
+build vorbisdecoder.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/VorbisDecoder.cpp
+
+build vorbistools.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/VorbisTools.cpp
+
+build findpageresult.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/_VorbisDecodeState/FindPageResult.cpp
+
+build codebook.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Codebook.cpp
+
+build comment.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Comment.cpp
+
+build floor.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Floor.cpp
+
+build floor0.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Floor0.cpp
+
+build floor1.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Floor1.cpp
+
+build header.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Header.cpp
+
+build intpoint.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/IntPoint.cpp
+
+build mapping.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Mapping.cpp
+
+build mappingchannel.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/MappingChannel.cpp
+
+build mode.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Mode.cpp
+
+build page.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Page.cpp
+
+build pageflag.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/PageFlag.cpp
+
+build probedpage.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/ProbedPage.cpp
+
+build readererror.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/ReaderError.cpp
+
+build readererrortype.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/ReaderErrorType.cpp
+
+build residue.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Residue.cpp
+
+build setting.o: cxx ../Sources/src/kha/audio2/ogg/vorbis/data/Setting.cpp
+
+build graphics_.o: cxx ../Sources/src/kha/graphics1/Graphics.cpp
+
+build graphics__.o: cxx ../Sources/src/kha/graphics2/Graphics.cpp
+
+build graphics1.o: cxx ../Sources/src/kha/graphics2/Graphics1.cpp
+
+build stbtruetype.o: cxx ../Sources/src/kha/graphics2/truetype/StbTruetype.cpp
+
+build stbtt__active_edge.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__active_edge.cpp
+
+build stbtt__bitmap.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__bitmap.cpp
+
+build stbtt__buf.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__buf.cpp
+
+build stbtt__csctx.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__csctx.cpp
+
+build stbtt__edge.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__edge.cpp
+
+build stbtt__point.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt__point.cpp
+
+build stbtt_aligned_quad.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_aligned_quad.cpp
+
+build stbtt_bakedchar.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_bakedchar.cpp
+
+build stbtt_fontinfo.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_fontinfo.cpp
+
+build stbtt_pack_context.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_pack_context.cpp
+
+build stbtt_pack_range.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_pack_range.cpp
+
+build stbtt_packedchar.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_packedchar.cpp
+
+build stbtt_temp_font_v_metrics.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_temp_font_v_metrics.cpp
+
+build stbtt_temp_glyph_h_metrics.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_temp_glyph_h_metrics.cpp
+
+build stbtt_temp_rect.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_temp_rect.cpp
+
+build stbtt_temp_region.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_temp_region.cpp
+
+build stbtt_vertex.o: cxx ../Sources/src/kha/graphics2/truetype/Stbtt_vertex.cpp
+
+build vectorofintpointer.o: cxx ../Sources/src/kha/graphics2/truetype/VectorOfIntPointer.cpp
+
+build coloredshaderpainter.o: cxx ../Sources/src/kha/graphics4/ColoredShaderPainter.cpp
+
+build constantlocation.o: cxx ../Sources/src/kha/graphics4/ConstantLocation.cpp
+
+build cubemap.o: cxx ../Sources/src/kha/graphics4/CubeMap.cpp
+
+build fragmentshader.o: cxx ../Sources/src/kha/graphics4/FragmentShader.cpp
+
+build geometryshader.o: cxx ../Sources/src/kha/graphics4/GeometryShader.cpp
+
+build graphics___.o: cxx ../Sources/src/kha/graphics4/Graphics.cpp
+
+build graphics2.o: cxx ../Sources/src/kha/graphics4/Graphics2.cpp
+
+build imageshaderpainter.o: cxx ../Sources/src/kha/graphics4/ImageShaderPainter.cpp
+
+build indexbuffer.o: cxx ../Sources/src/kha/graphics4/IndexBuffer.cpp
+
+build internalpipeline.o: cxx ../Sources/src/kha/graphics4/InternalPipeline.cpp
+
+build perframebufferpipelinecache.o: cxx ../Sources/src/kha/graphics4/PerFramebufferPipelineCache.cpp
+
+build pipelinecache.o: cxx ../Sources/src/kha/graphics4/PipelineCache.cpp
+
+build pipelinestate.o: cxx ../Sources/src/kha/graphics4/PipelineState.cpp
+
+build pipelinestatebase.o: cxx ../Sources/src/kha/graphics4/PipelineStateBase.cpp
+
+build simplepipelinecache.o: cxx ../Sources/src/kha/graphics4/SimplePipelineCache.cpp
+
+build stencilvalue.o: cxx ../Sources/src/kha/graphics4/StencilValue.cpp
+
+build tessellationcontrolshader.o: cxx ../Sources/src/kha/graphics4/TessellationControlShader.cpp
+
+build tessellationevaluationshader.o: cxx ../Sources/src/kha/graphics4/TessellationEvaluationShader.cpp
+
+build textshaderpainter.o: cxx ../Sources/src/kha/graphics4/TextShaderPainter.cpp
+
+build textureunit.o: cxx ../Sources/src/kha/graphics4/TextureUnit.cpp
+
+build vertexbuffer.o: cxx ../Sources/src/kha/graphics4/VertexBuffer.cpp
+
+build vertexelement.o: cxx ../Sources/src/kha/graphics4/VertexElement.cpp
+
+build vertexshader.o: cxx ../Sources/src/kha/graphics4/VertexShader.cpp
+
+build vertexstructure.o: cxx ../Sources/src/kha/graphics4/VertexStructure.cpp
+
+build vertexdata_impl_.o: cxx ../Sources/src/kha/graphics4/_VertexData/VertexData_Impl_.cpp
+
+build blockinterventions.o: cxx ../Sources/src/kha/input/BlockInterventions.cpp
+
+build gamepad.o: cxx ../Sources/src/kha/input/Gamepad.cpp
+
+build keyboard.o: cxx ../Sources/src/kha/input/Keyboard.cpp
+
+build mouse.o: cxx ../Sources/src/kha/input/Mouse.cpp
+
+build mousecursor.o: cxx ../Sources/src/kha/input/MouseCursor.cpp
+
+build mouseeventblockbehavior.o: cxx ../Sources/src/kha/input/MouseEventBlockBehavior.cpp
+
+build mouseimpl.o: cxx ../Sources/src/kha/input/MouseImpl.cpp
+
+build pen.o: cxx ../Sources/src/kha/input/Pen.cpp
+
+build sensor.o: cxx ../Sources/src/kha/input/Sensor.cpp
+
+build surface.o: cxx ../Sources/src/kha/input/Surface.cpp
+
+build touchdowneventblockbehavior.o: cxx ../Sources/src/kha/input/TouchDownEventBlockBehavior.cpp
+
+build bytesblob.o: cxx ../Sources/src/kha/internal/BytesBlob.cpp
+
+build intbox.o: cxx ../Sources/src/kha/internal/IntBox.cpp
+
+build keyboard_.o: cxx ../Sources/src/kha/kore/Keyboard.cpp
+
+build video_.o: cxx ../Sources/src/kha/kore/Video.cpp
+
+build constantlocation_.o: cxx ../Sources/src/kha/kore/graphics4/ConstantLocation.cpp
+
+build graphics____.o: cxx ../Sources/src/kha/kore/graphics4/Graphics.cpp
+
+build graphics2_.o: cxx ../Sources/src/kha/kore/graphics4/Graphics2.cpp
+
+build textureunit_.o: cxx ../Sources/src/kha/kore/graphics4/TextureUnit.cpp
+
+build fastmatrix3.o: cxx ../Sources/src/kha/math/FastMatrix3.cpp
+
+build fastmatrix4.o: cxx ../Sources/src/kha/math/FastMatrix4.cpp
+
+build fastvector2.o: cxx ../Sources/src/kha/math/FastVector2.cpp
+
+build fastvector3.o: cxx ../Sources/src/kha/math/FastVector3.cpp
+
+build fastvector4.o: cxx ../Sources/src/kha/math/FastVector4.cpp
+
+build matrix3.o: cxx ../Sources/src/kha/math/Matrix3.cpp
+
+build matrix4.o: cxx ../Sources/src/kha/math/Matrix4.cpp
+
+build quaternion.o: cxx ../Sources/src/kha/math/Quaternion.cpp
+
+build vector2.o: cxx ../Sources/src/kha/math/Vector2.cpp
+
+build vector3.o: cxx ../Sources/src/kha/math/Vector3.cpp
+
+build vector4.o: cxx ../Sources/src/kha/math/Vector4.cpp
+
+build client.o: cxx ../Sources/src/kha/netsync/Client.cpp
+
+build controller.o: cxx ../Sources/src/kha/netsync/Controller.cpp
+
+build controllerbuilder.o: cxx ../Sources/src/kha/netsync/ControllerBuilder.cpp
+
+build entity.o: cxx ../Sources/src/kha/netsync/Entity.cpp
+
+build localclient.o: cxx ../Sources/src/kha/netsync/LocalClient.cpp
+
+build network.o: cxx ../Sources/src/kha/netsync/Network.cpp
+
+build session.o: cxx ../Sources/src/kha/netsync/Session.cpp
+
+build state.o: cxx ../Sources/src/kha/netsync/State.cpp
+
+build syncbuilder.o: cxx ../Sources/src/kha/netsync/SyncBuilder.cpp
+
+build pose.o: cxx ../Sources/src/kha/vr/Pose.cpp
+
+build posestate.o: cxx ../Sources/src/kha/vr/PoseState.cpp
+
+build sensorstate.o: cxx ../Sources/src/kha/vr/SensorState.cpp
+
+build timewarpimage.o: cxx ../Sources/src/kha/vr/TimeWarpImage.cpp
+
+build timewarpparms.o: cxx ../Sources/src/kha/vr/TimeWarpParms.cpp
+
+build vrinterface.o: cxx ../Sources/src/kha/vr/VrInterface.cpp
+
+build vrinterfaceemulated.o: cxx ../Sources/src/kha/vr/VrInterfaceEmulated.cpp
+
+build lightcubepipeline.o: cxx ../Sources/src/pipelines/LightCubePipeline.cpp
+
+build texturecubepipeline.o: cxx ../Sources/src/pipelines/TextureCubePipeline.cpp
+
+build filesystem.o: cxx ../Sources/src/sys/FileSystem.cpp
+
+build file.o: cxx ../Sources/src/sys/io/File.cpp
+
+build fileinput.o: cxx ../Sources/src/sys/io/FileInput.cpp
+
+build fileseek.o: cxx ../Sources/src/sys/io/FileSeek.cpp
+
+build deque.o: cxx ../Sources/src/sys/thread/Deque.cpp
+
+build eventloop.o: cxx ../Sources/src/sys/thread/EventLoop.cpp
+
+build lock.o: cxx ../Sources/src/sys/thread/Lock.cpp
+
+build mutex.o: cxx ../Sources/src/sys/thread/Mutex.cpp
+
+build tls.o: cxx ../Sources/src/sys/thread/Tls.cpp
+
+build regularevent.o: cxx ../Sources/src/sys/thread/_EventLoop/RegularEvent.cpp
+
+build haxethread.o: cxx ../Sources/src/sys/thread/_Thread/HaxeThread.cpp
+
+build thread_impl_.o: cxx ../Sources/src/sys/thread/_Thread/Thread_Impl_.cpp
+
+build ext.o: cxx ../Sources/src/zui/Ext.cpp
+
+build handle.o: cxx ../Sources/src/zui/Handle.cpp
+
+build id.o: cxx ../Sources/src/zui/Id.cpp
+
+build themes.o: cxx ../Sources/src/zui/Themes.cpp
+
+build zui.o: cxx ../Sources/src/zui/Zui.cpp
+
+build main_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/main.cpp
+
+build aes.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/aes.c
+
+build aesni.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/aesni.c
+
+build arc4.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/arc4.c
+
+build asn1parse.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/asn1parse.c
+
+build asn1write.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/asn1write.c
+
+build base64.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/base64.c
+
+build bignum.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/bignum.c
+
+build blowfish.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/blowfish.c
+
+build camellia.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/camellia.c
+
+build ccm.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ccm.c
+
+build certs.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/certs.c
+
+build cipher.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/cipher.c
+
+build cipher_wrap.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/cipher_wrap.c
+
+build cmac.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/cmac.c
+
+build ctr_drbg.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ctr_drbg.c
+
+build debug.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/debug.c
+
+build des.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/des.c
+
+build dhm.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/dhm.c
+
+build ecdh.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ecdh.c
+
+build ecdsa.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ecdsa.c
+
+build ecjpake.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ecjpake.c
+
+build ecp.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ecp.c
+
+build ecp_curves.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ecp_curves.c
+
+build entropy.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/entropy.c
+
+build entropy_poll.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/entropy_poll.c
+
+build error_.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/error.c
+
+build gcm.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/gcm.c
+
+build havege.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/havege.c
+
+build hmac_drbg.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/hmac_drbg.c
+
+build md.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/md.c
+
+build md2.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/md2.c
+
+build md4.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/md4.c
+
+build md5.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/md5.c
+
+build md_wrap.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/md_wrap.c
+
+build memory_buffer_alloc.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/memory_buffer_alloc.c
+
+build net_sockets.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/net_sockets.c
+
+build oid.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/oid.c
+
+build padlock.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/padlock.c
+
+build pem.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pem.c
+
+build pk.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pk.c
+
+build pk_wrap.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pk_wrap.c
+
+build pkcs11.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pkcs11.c
+
+build pkcs12.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pkcs12.c
+
+build pkcs5.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pkcs5.c
+
+build pkparse.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pkparse.c
+
+build pkwrite.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/pkwrite.c
+
+build platform.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/platform.c
+
+build ripemd160.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ripemd160.c
+
+build rsa.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/rsa.c
+
+build rsa_internal.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/rsa_internal.c
+
+build sha1.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/sha1.c
+
+build sha256.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/sha256.c
+
+build sha512.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/sha512.c
+
+build ssl_cache.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_cache.c
+
+build ssl_ciphersuites.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_ciphersuites.c
+
+build ssl_cli.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_cli.c
+
+build ssl_cookie.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_cookie.c
+
+build ssl_srv.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_srv.c
+
+build ssl_ticket.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_ticket.c
+
+build ssl_tls.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/ssl_tls.c
+
+build threading.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/threading.c
+
+build timing.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/timing.c
+
+build version.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/version.c
+
+build version_features.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/version_features.c
+
+build x509.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509.c
+
+build x509_create.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509_create.c
+
+build x509_crl.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509_crl.c
+
+build x509_crt.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509_crt.c
+
+build x509_csr.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509_csr.c
+
+build x509write_crt.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509write_crt.c
+
+build x509write_csr.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/x509write_csr.c
+
+build xtea.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/mbedtls-2.9.0/library/xtea.c
+
+build pcre2_auto_possess.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_auto_possess.c
+
+build pcre2_chartables.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_chartables.c
+
+build pcre2_compile.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_compile.c
+
+build pcre2_config.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_config.c
+
+build pcre2_context.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_context.c
+
+build pcre2_convert.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_convert.c
+
+build pcre2_dfa_match.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_dfa_match.c
+
+build pcre2_error.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_error.c
+
+build pcre2_extuni.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_extuni.c
+
+build pcre2_find_bracket.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_find_bracket.c
+
+build pcre2_fuzzsupport.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_fuzzsupport.c
+
+build pcre2_jit_compile.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_jit_compile.c
+
+build pcre2_maketables.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_maketables.c
+
+build pcre2_match.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_match.c
+
+build pcre2_match_data.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_match_data.c
+
+build pcre2_newline.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_newline.c
+
+build pcre2_ord2utf.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_ord2utf.c
+
+build pcre2_pattern_info.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_pattern_info.c
+
+build pcre2_script_run.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_script_run.c
+
+build pcre2_serialize.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_serialize.c
+
+build pcre2_string_utils.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_string_utils.c
+
+build pcre2_study.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_study.c
+
+build pcre2_substitute.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_substitute.c
+
+build pcre2_substring.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_substring.c
+
+build pcre2_tables.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_tables.c
+
+build pcre2_ucd.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_ucd.c
+
+build pcre2_ucptables.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_ucptables.c
+
+build pcre2_valid_utf.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_valid_utf.c
+
+build pcre2_xclass.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/pcre2-10.42/src/pcre2_xclass.c
+
+build adler32.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/adler32.c
+
+build compress.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/compress.c
+
+build crc32_.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/crc32.c
+
+build deflate.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/deflate.c
+
+build infback.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/infback.c
+
+build inffast.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/inffast.c
+
+build inflate.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/inflate.c
+
+build inftrees.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/inftrees.c
+
+build trees.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/trees.c
+
+build uncompr.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/uncompr.c
+
+build zutil.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/project/thirdparty/zlib-1.2.11/zutil.c
+
+build array.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/Array.cpp
+
+build dynamic.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/Dynamic.cpp
+
+build enum.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/Enum.cpp
+
+build math.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/Math.cpp
+
+build string.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/String.cpp
+
+build hxcpp.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hxcpp.cpp
+
+build anon.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Anon.cpp
+
+build boot.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Boot.cpp
+
+build cffi.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/CFFI.cpp
+
+build class.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Class.cpp
+
+build date_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Date.cpp
+
+build debug_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Debug.cpp
+
+build hash.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Hash.cpp
+
+build interface.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Interface.cpp
+
+build lib.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Lib.cpp
+
+build object.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Object.cpp
+
+build runlibs.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/RunLibs.cpp
+
+build stdlibs.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/StdLibs.cpp
+
+build thread.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/Thread.cpp
+
+build gccommon.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/gc/GcCommon.cpp
+
+build gcregcapture.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/gc/GcRegCapture.cpp
+
+build immix.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/gc/Immix.cpp
+
+build regexp.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/regexp/RegExp.cpp
+
+build ssl.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/ssl/SSL.cpp
+
+build file_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/std/File.cpp
+
+build process.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/std/Process.cpp
+
+build random.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/std/Random.cpp
+
+build socket.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/std/Socket.cpp
+
+build sys_.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/std/Sys.cpp
+
+build zlib.o: cxx ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/khacpp/src/hx/libs/zlib/ZLib.cpp
+
+build loader.o: cc ../../../../../../.vscode-oss/extensions/kodetech.kha-23.5.0-universal/Kha/Backends/Kinc-hxcpp/lib/khalib/loader.c
+
+build New-Project: link compute.o openglunit.o g5ong4unit.o linuxunit.o posixunit.o rootunit.o rootunit_.o a1unit.o audio.o graphics.o graphics_kore.o graphics_soft.o g4unit.o g5unit.o inputunit.o iounit.o stb_vorbis.o mathunit.o networkunit.o waylandunit.o camera.o date.o lambda.o main.o matrixutils.o reflect.o scene.o std.o stringtools.o sys.o type.o __boot__.o __files__.o __lib__.o __resources__.o int64map.o gc.o entrypoint.o exception.o imap.o log.o mainevent.o mainloop.o nativestacktrace.o timer.o unserializer.o valueexception.o defaultresolver.o intmap.o list.o objectmap.o stringmap.o listnode.o notimplementedexception.o posexception.o bytes.o bytesbuffer.o bytesinput.o bytesoutput.o encoding.o eof.o error.o fphelper.o input.o output.o path.o arrayiterator.o alignedquad.o assets.o blobcallback.o canvas.o display.o displaymode.o frametask.o framebuffer.o framebufferoptions.o image.o imagecallback.o kravur.o kravurimage.o loaderimpl.o resource.o scheduler.o shaders.o sound.o soundcallback.o system.o systemimpl.o systemoptions.o timetask.o video.o window.o windowoptions.o worker.o bloblist.o fontlist.o imagelist.o soundlist.o videolist.o color_impl_.o windowfeatures_impl_.o message.o bytearrayprivate.o bytearray_impl_.o float32array_impl_.o int16array_impl_.o int32array_impl_.o uint32array_impl_.o audiochannel.o audio_.o audio1.o audiochannel_.o buffer.o resamplingaudiochannel.o streamchannel.o crc32.o mathtools.o mdct.o reader.o vorbisdecodestate.o vorbisdecoder.o vorbistools.o findpageresult.o codebook.o comment.o floor.o floor0.o floor1.o header.o intpoint.o mapping.o mappingchannel.o mode.o page.o pageflag.o probedpage.o readererror.o readererrortype.o residue.o setting.o graphics_.o graphics__.o graphics1.o stbtruetype.o stbtt__active_edge.o stbtt__bitmap.o stbtt__buf.o stbtt__csctx.o stbtt__edge.o stbtt__point.o stbtt_aligned_quad.o stbtt_bakedchar.o stbtt_fontinfo.o stbtt_pack_context.o stbtt_pack_range.o stbtt_packedchar.o stbtt_temp_font_v_metrics.o stbtt_temp_glyph_h_metrics.o stbtt_temp_rect.o stbtt_temp_region.o stbtt_vertex.o vectorofintpointer.o coloredshaderpainter.o constantlocation.o cubemap.o fragmentshader.o geometryshader.o graphics___.o graphics2.o imageshaderpainter.o indexbuffer.o internalpipeline.o perframebufferpipelinecache.o pipelinecache.o pipelinestate.o pipelinestatebase.o simplepipelinecache.o stencilvalue.o tessellationcontrolshader.o tessellationevaluationshader.o textshaderpainter.o textureunit.o vertexbuffer.o vertexelement.o vertexshader.o vertexstructure.o vertexdata_impl_.o blockinterventions.o gamepad.o keyboard.o mouse.o mousecursor.o mouseeventblockbehavior.o mouseimpl.o pen.o sensor.o surface.o touchdowneventblockbehavior.o bytesblob.o intbox.o keyboard_.o video_.o constantlocation_.o graphics____.o graphics2_.o textureunit_.o fastmatrix3.o fastmatrix4.o fastvector2.o fastvector3.o fastvector4.o matrix3.o matrix4.o quaternion.o vector2.o vector3.o vector4.o client.o controller.o controllerbuilder.o entity.o localclient.o network.o session.o state.o syncbuilder.o pose.o posestate.o sensorstate.o timewarpimage.o timewarpparms.o vrinterface.o vrinterfaceemulated.o lightcubepipeline.o texturecubepipeline.o filesystem.o file.o fileinput.o fileseek.o deque.o eventloop.o lock.o mutex.o tls.o regularevent.o haxethread.o thread_impl_.o ext.o handle.o id.o themes.o zui.o main_.o aes.o aesni.o arc4.o asn1parse.o asn1write.o base64.o bignum.o blowfish.o camellia.o ccm.o certs.o cipher.o cipher_wrap.o cmac.o ctr_drbg.o debug.o des.o dhm.o ecdh.o ecdsa.o ecjpake.o ecp.o ecp_curves.o entropy.o entropy_poll.o error_.o gcm.o havege.o hmac_drbg.o md.o md2.o md4.o md5.o md_wrap.o memory_buffer_alloc.o net_sockets.o oid.o padlock.o pem.o pk.o pk_wrap.o pkcs11.o pkcs12.o pkcs5.o pkparse.o pkwrite.o platform.o ripemd160.o rsa.o rsa_internal.o sha1.o sha256.o sha512.o ssl_cache.o ssl_ciphersuites.o ssl_cli.o ssl_cookie.o ssl_srv.o ssl_ticket.o ssl_tls.o threading.o timing.o version.o version_features.o x509.o x509_create.o x509_crl.o x509_crt.o x509_csr.o x509write_crt.o x509write_csr.o xtea.o pcre2_auto_possess.o pcre2_chartables.o pcre2_compile.o pcre2_config.o pcre2_context.o pcre2_convert.o pcre2_dfa_match.o pcre2_error.o pcre2_extuni.o pcre2_find_bracket.o pcre2_fuzzsupport.o pcre2_jit_compile.o pcre2_maketables.o pcre2_match.o pcre2_match_data.o pcre2_newline.o pcre2_ord2utf.o pcre2_pattern_info.o pcre2_script_run.o pcre2_serialize.o pcre2_string_utils.o pcre2_study.o pcre2_substitute.o pcre2_substring.o pcre2_tables.o pcre2_ucd.o pcre2_ucptables.o pcre2_valid_utf.o pcre2_xclass.o adler32.o compress.o crc32_.o deflate.o infback.o inffast.o inflate.o inftrees.o trees.o uncompr.o zutil.o array.o dynamic.o enum.o math.o string.o hxcpp.o anon.o boot.o cffi.o class.o date_.o debug_.o hash.o interface.o lib.o object.o runlibs.o stdlibs.o thread.o gccommon.o gcregcapture.o immix.o regexp.o ssl.o file_.o process.o random.o socket.o sys_.o zlib.o loader.o 
