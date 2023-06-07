@@ -26,6 +26,6 @@
 -D kha_html5_js
 -D kha
 -D kha_version=1810
--D kha_project_name=New Project
+-D kha_project_name=Lightning
 -js html5/kha.js
 -main Main

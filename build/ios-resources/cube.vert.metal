@@ -1,1 +1,0 @@
->cube_vert_main

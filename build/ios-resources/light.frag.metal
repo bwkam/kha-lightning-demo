@@ -1,1 +1,0 @@
->light_frag_main
